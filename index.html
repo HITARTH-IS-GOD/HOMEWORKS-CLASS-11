@@ -8,20 +8,30 @@
 </head>
 <body>
   <header class="hero">
-    <div class="container">
+    <div class="container narrow">
       <p class="eyebrow">Class 11 CS</p>
       <h1>Homework Archive</h1>
-      <p class="subtitle">All daily homework pages organised by date.</p>
+      <p class="subtitle">Daily homework pages for all class work.</p>
     </div>
   </header>
 
   <main class="container">
-    <section class="grid">
-      <a class="card" href="pages/2026-10-30.html">
-        <span class="tag">Friday</span>
-        <h2>30-10-2026</h2>
-        <p>String analysis and character counting homework.</p>
-      </a>
+    <section class="panel actions-panel">
+      <h2>Quick Tools</h2>
+      <div class="button-row">
+        <a class="btn primary" href="generator.html">Generate New Homework Page</a>
+      </div>
+    </section>
+
+    <section class="panel archive-panel">
+      <h2>Saved Homework</h2>
+      <div class="entry-list">
+        <a class="entry-card" href="pages/2026-10-30.html">
+          <span class="date-pill">30-10-2026</span>
+          <h3>Friday Homework</h3>
+          <p>String analysis practice</p>
+        </a>
+      </div>
     </section>
   </main>
 </body>

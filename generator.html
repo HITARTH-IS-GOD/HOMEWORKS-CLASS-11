@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Homework HTML Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero small-hero">
+    <div class="container narrow">
+      <p class="eyebrow">Class 11 CS</p>
+      <h1>Generate Homework Page</h1>
+      <p class="subtitle">Enter the date and paste your Python code. Copy the generated HTML and paste it into a new file in the GitHub repo.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel form-panel">
+      <h2>Daily Homework Form</h2>
+      <form id="homework-form">
+        <div class="field-row">
+          <label for="homework-date">Date</label>
+          <input type="date" id="homework-date" required />
+        </div>
+
+        <div class="field-row">
+          <label for="homework-title">Title</label>
+          <input type="text" id="homework-title" placeholder="Example: Friday Homework" />
+        </div>
+
+        <div class="field-row">
+          <label for="homework-code">Python Code</label>
+          <textarea id="homework-code" rows="20" placeholder="Paste your Python code here..." required></textarea>
+        </div>
+
+        <div class="button-row">
+          <button type="submit" class="primary">Generate HTML</button>
+          <button type="button" id="clear-form" class="secondary">Clear</button>
+          <a href="index.html" class="btn secondary">Back to Home</a>
+        </div>
+      </form>
+    </section>
+
+    <section id="output-panel" class="panel code-panel hidden">
+      <h2>Generated HTML</h2>
+      <p class="helper-text">Copy the entire content below and create a new file in the GitHub repo under <strong>pages/</strong>, for example: <strong>pages/2026-11-02.html</strong>.</p>
+      <textarea id="generated-output" rows="30" readonly></textarea>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

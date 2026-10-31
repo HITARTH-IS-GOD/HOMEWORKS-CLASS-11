@@ -2,142 +2,164 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(135deg, #0f172a, #111827, #1e293b);
-  color: #e5e7eb;
+  color: #e2e8f0;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 .container {
   width: min(1100px, 90%);
   margin: 0 auto;
 }
 
+.narrow {
+  max-width: 800px;
+}
+
 .hero {
-  padding: 80px 0 40px;
+  padding: 72px 0 34px;
   text-align: center;
   background: rgba(15, 23, 42, 0.7);
   border-bottom: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .eyebrow {
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.75rem;
   color: #93c5fd;
+  font-size: 0.74rem;
   margin-bottom: 12px;
 }
 
 .hero h1 {
-  font-size: clamp(2.2rem, 4vw, 4rem);
   margin: 0;
+  font-size: clamp(2.2rem, 5vw, 4rem);
 }
 
 .subtitle {
+  margin-top: 12px;
   color: #cbd5e1;
   font-size: 1.05rem;
-  margin-top: 12px;
 }
 
-.grid {
+main {
+  padding: 30px 0 60px;
+}
+
+.panel {
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+label {
+  font-weight: 700;
+}
+
+input, textarea, button, .btn {
+  font: inherit;
+}
+
+input, textarea {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.26);
+  border-radius: 10px;
+  color: #f8fafc;
+  padding: 12px 14px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 260px;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+button, .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.secondary {
+  background: rgba(148, 163, 184, 0.15);
+  color: #e2e8f0;
+}
+
+.entry-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 30px 0 60px;
+  gap: 18px;
 }
 
-.card {
+.entry-card {
   display: block;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  border-radius: 16px;
-  padding: 24px;
-  text-decoration: none;
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 18px;
   color: #f8fafc;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  border-color: #60a5fa;
-}
-
-.tag {
+.date-pill {
   display: inline-block;
   background: #1d4ed8;
-  color: white;
+  color: #edf6ff;
   border-radius: 999px;
+  padding: 5px 10px;
   font-size: 0.72rem;
-  padding: 6px 10px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
-.card h2 {
+.entry-card h3 {
   margin: 0 0 8px;
-  font-size: 1.6rem;
 }
 
-.card p {
-  margin: 0;
-  color: #cbd5e1;
-  line-height: 1.5;
-}
-
-.page {
-  width: min(1100px, 90%);
-  margin: 0 auto;
-  padding: 30px 0 60px;
-}
-
-.topbar {
-  margin-bottom: 26px;
-}
-
-.topbar a {
-  color: #93c5fd;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.assignment {
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  border-radius: 16px;
-  padding: 28px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
-}
-
-.assignment h1 {
-  margin-top: 8px;
-  margin-bottom: 12px;
-  font-size: clamp(2rem, 3vw, 3rem);
-}
-
-.assignment p {
+.helper-text {
   color: #cbd5e1;
   line-height: 1.6;
 }
 
-.code-box {
-  margin-top: 26px;
+.hidden {
+  display: none;
+}
+
+#generated-output {
+  width: 100%;
+  min-height: 420px;
   background: #020817;
-  border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  overflow-x: auto;
-}
-
-code, pre {
-  font-family: "Consolas", "Monaco", monospace;
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-
-pre {
-  margin: 0;
-  padding: 24px;
   color: #e2e8f0;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 12px;
+  padding: 18px;
+  font-family: "Consolas", "Courier New", monospace;
+  line-height: 1.6;
 }
