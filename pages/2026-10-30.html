@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Friday Homework - 30-10-2026</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <main class="page">
+    <nav class="topbar">
+      <a href="../index.html">← Back to Home</a>
+    </nav>
+
+    <article class="assignment">
+      <p class="eyebrow">Class 11 CS Homework</p>
+      <h1>Friday Homework - 30-10-2026</h1>
+      <p>
+        This page contains the Friday homework solution for working with string operations,
+        counting words, characters, and checking alphanumeric percentage.
+      </p>
+
+      <div class="code-box">
+        <pre><code>def string_1():
+    s1 = input("enter string 1:")
+
+    words1 = 0
+    characters1 = 0
+    alphanumchar1 = 0
+    ovr_total1 = 0
+
+    for i in s1:
+        if i == " ":
+            words1 += 1
+
+    for i in s1:
+        if i.isdigit() == True or i == " " or i == "," or i == ";" or i == ":" or i == "!" or i == "?":
+            characters1 += 1
+
+    for i in s1:
+        if i.isdigit() == True or i.isalpha() == True:
+            alphanumchar1 += 1
+
+    for i in s1:
+        ovr_total1 += 1
+
+    if ovr_total1 > 0:
+        per_char_alphanum1 = (alphanumchar1 / ovr_total1) * 100
+    else:
+        per_char_alphanum1 = 0
+
+    print(words1)
+    print(characters1)
+    print(per_char_alphanum1)
+
+    string_2()
+
+def string_2():
+    s2 = input("enter string 2:")
+
+    words2 = 0
+    characters2 = 0
+    alphanumchar2 = 0
+    ovr_total2 = 0
+
+    for i in s2:
+        if i == " ":
+            words2 += 1
+
+    for i in s2:
+        if i.isdigit() == True or i == " " or i == "," or i == ";" or i == ":" or i == "!" or i == "?":
+            characters2 += 1
+
+    for i in s2:
+        if i.isdigit() == True or i.isalpha() == True:
+            alphanumchar2 += 1
+
+    for i in s2:
+        ovr_total2 += 1
+
+    if ovr_total2 > 0:
+        per_char_alphanum2 = (alphanumchar2 / ovr_total2) * 100
+    else:
+        per_char_alphanum2 = 0
+
+    print(words2)
+    print(characters2)
+    print(per_char_alphanum2)
+    string_3()
+
+def string_3():
+    s3 = input("enter string 3:")
+
+    words3 = 0
+    characters3 = 0
+    alphanumchar3 = 0
+    ovr_total3 = 0
+
+    for i in s3:
+        if i == " ":
+            words3 += 1
+
+    for i in s3:
+        if i.isdigit() == True or i == " " or i == "," or i == ";" or i == ":" or i == "!" or i == "?":
+            characters3 += 1
+
+    for i in s3:
+        if i.isdigit() == True or i.isalpha() == True:
+            alphanumchar3 += 1
+
+    for i in s3:
+        ovr_total3 += 1
+
+    if ovr_total3 > 0:
+        per_char_alphanum3 = (alphanumchar3 / ovr_total3) * 100
+    else:
+        per_char_alphanum3 = 0
+
+    print(words3)
+    print(characters3)
+    print(per_char_alphanum3)
+    string_4()
+
+def string_4():
+    s4 = input("enter string 4:")
+
+    words4 = 0
+    characters4 = 0
+    alphanumchar4 = 0
+    ovr_total4 = 0
+
+    for i in s4:
+        if i == " ":
+            words4 += 1
+
+    for i in s4:
+        if i.isdigit() == True or i == " " or i == "," or i == ";" or i == ":" or i == "!" or i == "?":
+            characters4 += 1
+
+    for i in s4:
+        if i.isdigit() == True or i.isalpha() == True:
+            alphanumchar4 += 1
+
+    for i in s4:
+        ovr_total4 += 1
+
+    if ovr_total4 > 0:
+        per_char_alphanum4 = (alphanumchar4 / ovr_total4) * 100
+    else:
+        per_char_alphanum4 = 0
+
+    print(words4)
+    print(characters4)
+    print(per_char_alphanum4)
+    string_5()
+
+def string_5():
+    s5 = input("enter string 5:")
+
+    words5 = 0
+    characters5 = 0
+    alphanumchar5 = 0
+    ovr_total5 = 0
+
+    for i in s5:
+        if i == " ":
+            words5 += 1
+
+    for i in s5:
+        if i.isdigit() == True or i == " " or i == "," or i == ";" or i == ":" or i == "!" or i == "?":
+            characters5 += 1
+
+    for i in s5:
+        if i.isdigit() == True or i.isalpha() == True:
+            alphanumchar5 += 1
+
+    for i in s5:
+        ovr_total5 += 1
+
+    if ovr_total5 > 0:
+        per_char_alphanum5 = (alphanumchar5 / ovr_total5) * 100
+    else:
+        per_char_alphanum5 = 0
+
+    print(words5)
+    print(characters5)
+    print(per_char_alphanum5)
+
+# Start the chain
+string_1()
+</code></pre>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
