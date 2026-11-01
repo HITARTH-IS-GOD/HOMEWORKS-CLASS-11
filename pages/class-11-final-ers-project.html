@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CLASS 11 FINAL ERS PROJECT</title>
+  <title>Updated ERS Project</title>
   <style>
     body {
       margin: 0;
@@ -33,8 +33,16 @@
 
     h1 {
       margin-top: 0;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     pre {
@@ -50,21 +58,13 @@
       font-size: 0.9rem;
       font-family: "Consolas", "Courier New", monospace;
     }
-
-    .back-link {
-      display: inline-block;
-      margin-bottom: 20px;
-      color: #93c5fd;
-      text-decoration: none;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <a class="back-link" href="../index.html">← Back to Home</a>
     <div class="meta">Class 11 CS Final Project</div>
-    <h1>CLASS 11 FINAL ERS PROJECT</h1>
+    <h1>Updated ERS Project</h1>
 
     <pre><code>import time
 
@@ -212,28 +212,15 @@ def request_purchase_order():
         choice = input("Enter choice (1, 2, or 3): ")
 
         if choice == "1":
-            vendor_name = input("Enter Vendor Name: ")
-            serial_no = input("Enter Serial No / Request No: ")
+            serial_no = input("Enter Request No / Reference No: ")
             item_description = input("Enter Item Description: ")
-            quantity = input("Enter Quantity: ")
-            unit = input("Enter Unit: ")
-            rate = input("Enter Rate: ")
-            discount = input("Enter Discount: ")
-            amount = input("Enter Amount: ")
-            tax = input("Enter Tax: ")
-            freight = input("Enter Freight: ")
-            insurance_no = input("Enter Insurance No: ")
-            gstin = input("Enter GSTIN: ")
-            bill_to_address = input("Enter Bill To Address: ")
-            ship_to_address = input("Enter Ship To Address: ")
+            quantity = input("Enter Quantity Needed: ")
+            unit = input("Enter Unit (e.g. Kg, Pcs, Ton): ")
+            purpose = input("Enter Purpose / End Use: ")
 
-            req_data = [
-                vendor_name, serial_no, item_description, quantity, unit, 
-                rate, discount, amount, tax, freight, insurance_no, gstin, 
-                bill_to_address, ship_to_address
-            ]
+            req_data = [serial_no, item_description, quantity, unit, purpose]
             requested_po_list.append(req_data)
-            print("\n[Success] Purchase Request recorded and submitted for approval!")
+            print("\n[Success] Purchase Request submitted to Store/Purchase Department!")
 
         elif choice == "2":
             if requested_po_list == []:
@@ -243,11 +230,10 @@ def request_purchase_order():
                     print("\n============================================================")
                     print("                   PENDING PURCHASE REQUEST                 ")
                     print("============================================================")
-                    print(f"| Serial No            | {req[1]:<33} |")
-                    print(f"| Vendor Name          | {req[0]:<33} |")
-                    print(f"| Item Description     | {req[2]:<33} |")
-                    print(f"| Quantity             | {req[3]} {req[4]:<30} |")
-                    print(f"| Total Amount         | {req[7]:<33} |")
+                    print(f"| Request No           | {req[0]:<33} |")
+                    print(f"| Item Description     | {req[1]:<33} |")
+                    print(f"| Quantity Needed      | {req[2]} {req[3]:<30} |")
+                    print(f"| Purpose / Use        | {req[4]:<33} |")
                     print("============================================================")
 
         elif choice == "3":
@@ -271,29 +257,49 @@ def make_purchase_order():
                 print("\n*** PENDING PURCHASE REQUESTS FOUND ***")
                 pos = 1
                 for req in requested_po_list:
-                    print(pos, ". PO No:", req[1], "| Vendor:", req[0], "| Item:", req[2], "| Qty:", req[3])
+                    print(pos, ". Req No:", req[0], "| Item:", req[1], "| Qty:", req[2], req[3], "| Purpose:", req[4])
                     pos = pos + 1
 
                 print("\nOptions:")
-                print("1. Confirm a Pending Request")
-                print("2. Create Brand New Purchase Order")
+                print("1. Process & Confirm a Pending Request")
+                print("2. Create Brand New Purchase Order Directly")
                 po_mode = input("Enter choice (1 or 2): ")
 
                 if po_mode == "1":
-                    req_choice = input("Enter the Request Number to Confirm: ")
+                    req_choice = input("Enter the Request Number to Confirm (1, 2, ...): ")
                     
                     found_index = -1
                     counter = 1
                     for item in requested_po_list:
-                        if req_choice == counter:
+                        if req_choice == str(counter):
                             found_index = counter - 1
                             break
                         counter = counter + 1
 
                     if found_index != -1:
-                        selected_req = requested_po_list[found_index]
-                        purchase_orders_list.append(selected_req)
-                        print("\n[Success] Purchase Order confirmed and added to Official POs!")
+                        sel_req = requested_po_list[found_index]
+                        print("\n--- ENTERING COMMERCIAL DETAILS FOR APPROVED REQUEST ---")
+                        print(f"Item: {sel_req[1]} | Qty: {sel_req[2]} {sel_req[3]} | Purpose: {sel_req[4]}")
+                        
+                        vendor_name = input("Enter Vendor Name: ")
+                        serial_no = input("Enter Official PO Serial No: ")
+                        rate = input("Enter Rate: ")
+                        discount = input("Enter Discount: ")
+                        amount = input("Enter Total Amount: ")
+                        tax = input("Enter Tax: ")
+                        freight = input("Enter Freight: ")
+                        insurance_no = input("Enter Insurance No: ")
+                        gstin = input("Enter GSTIN: ")
+                        bill_to_address = input("Enter Bill To Address: ")
+                        ship_to_address = input("Enter Ship To Address: ")
+
+                        po_data = [
+                            vendor_name, serial_no, sel_req[1], sel_req[2], sel_req[3],
+                            rate, discount, amount, tax, freight, insurance_no, gstin,
+                            bill_to_address, ship_to_address
+                        ]
+                        purchase_orders_list.append(po_data)
+                        print("\n[Success] Request approved and Official Purchase Order created!")
                         continue
                     else:
                         print("\n[Error] Invalid Request Number!")
