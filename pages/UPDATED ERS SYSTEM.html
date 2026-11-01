@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Updated ERS Project</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .meta {
+      color: #93c5fd;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    pre {
+      background: #020817;
+      color: #e2e8f0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 12px;
+      padding: 22px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      line-height: 1.7;
+      font-size: 0.9rem;
+      font-family: "Consolas", "Courier New", monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="../index.html">← Back to Home</a>
+    <div class="meta">Class 11 CS Final Project</div>
+    <h1>Updated ERS Project</h1>
+
+    <pre><code>import time
+
+it_security_logs = []
+purchase_orders_list = []
+requested_po_list = []
+gate_entries_list = []
+weighbridge_entries_list = []
+issued_goods_list = []
+grn_list = []
+payment_list = []
+
+def login():
+    print("____________________________________________")
+    print("|       ERS   SECURE  LOGIN  PORTAL         |") 
+    print("|___________________________________________|")
+
+    username_entry = input("USERNAME : ")
+    password_entry = input("PASSWORD : ")
+
+    if (username_entry == "store_admin" and password_entry == "store123") or \
+       (username_entry == "acc_admin" and password_entry == "accounts123") or \
+       (username_entry == "IT_admin" and password_entry == "it123") or \
+       (username_entry == "gate_admin" and password_entry == "gate123") or \
+       (username_entry == "weight_admin" and password_entry == "weight123"):
+
+        print("\n Welcome") 
+        time.sleep(1)
+        main_terminal()  
+        
+    else:
+        print("** ENTRY IS FLAGGED **")
+        print("Try Again")
+        it_security_logs.append(username_entry)
+        print()  
+        login()
+
+def main_terminal():
+    print("\n|-----------------------------------|")
+    print("|    UMBRELLA   INFRA    CORP       |")
+    print("|-----------------------------------|")
+    
+    print(" 1. GATE ENTRY ")
+    print(" 2. WEIGHT BRIDGE ENTRY")
+    print(" 3. STORE KEEPING")
+    print(" 4. ACCOUNTS")
+    print(" 5. REQUEST A PURCHASE ORDER")
+    print(" 6. MAKE A PURCHASE ORDER")
+    print(" 7. IT ADMIN")
+    print(" 8. LOGOUT")
+
+    choice = input("ENTER YOUR SELECTION : ")
+
+    if choice == "1":
+        print("\n--- GATE VERIFICATION ---")
+        user = input("ENTER GATE USERNAME : ")
+        pwd = input("ENTER GATE PASSWORD : ")
+        if user == "gate_admin" and pwd == "gate123":
+            print("\n[Access Granted]")
+            gate()
+        else:
+            print("\n** ACCESS DENIED! ENTRY IS FLAGGED **")
+            it_security_logs.append(user)
+            main_terminal()
+
+    elif choice == "2":
+        print("\n--- WEIGHBRIDGE VERIFICATION ---")
+        user = input("ENTER WEIGHBRIDGE USERNAME : ")
+        pwd = input("ENTER WEIGHBRIDGE PASSWORD : ")
+        if user == "weight_admin" and pwd == "weight123":
+            print("\n[Access Granted]")
+            weight_bridge()
+        else:
+            print("\n** ACCESS DENIED! ENTRY IS FLAGGED **")
+            it_security_logs.append(user)
+            main_terminal()
+
+    elif choice == "3": 
+        print("\n--- STORE KEEPING VERIFICATION ---")
+        user = input("ENTER STORE USERNAME : ")
+        pwd = input("ENTER STORE PASSWORD : ")
+        if user == "store_admin" and pwd == "store123":
+            print("\n[Access Granted]")
+            store_keeping()
+        else:
+            print("\n** ACCESS DENIED! ENTRY IS FLAGGED **")
+            it_security_logs.append(user)
+            main_terminal()
+
+    elif choice == "4":
+        print("\n--- ACCOUNTS VERIFICATION ---")
+        user = input("ENTER ACCOUNTS USERNAME : ")
+        pwd = input("ENTER ACCOUNTS PASSWORD : ")
+        if user == "acc_admin" and pwd == "accounts123":
+            print("\n[Access Granted]")
+            accounts()
+        else:
+            print("\n** ACCESS DENIED! ENTRY IS FLAGGED **")
+            it_security_logs.append(user)
+            main_terminal()
+
+    elif choice == "5":
+        request_purchase_order()
+
+    elif choice == "6":
+        print("\n--- PURCHASE ORDER VERIFICATION ---")
+        user = input("ENTER PO USERNAME : ")
+        pwd = input("ENTER PO PASSWORD : ")
+        if user == "store_admin" and pwd == "store123":
+            print("\n[Access Granted]")
+            make_purchase_order()
+        else:
+            print("\n** ACCESS DENIED! ENTRY IS FLAGGED **")
+            it_security_logs.append(user)
+            main_terminal()
+
+    elif choice == "7":
+        print("\n--- IT ADMIN VERIFICATION ---")
+        user = input("ENTER IT ADMIN USERNAME : ")
+        pwd = input("ENTER IT ADMIN PASSWORD : ")
+        if user == "IT_admin" and pwd == "it123":
+            print("\n[Access Granted]")
+            it_admin()
+        else:
+            print("\n** ACCESS DENIED! ENTRY IS FLAGGED **")
+            it_security_logs.append(user)
+            main_terminal()
+
+    elif choice == "8":
+        print("\nLogging out...")
+        login()
+    else:
+        print("****INVALID CHOICE!!!!****")
+        print("**** TRY  AGAIN  ****")
+        main_terminal()
+
+def request_purchase_order():
+    while True:
+        print("\n============================================================")
+        print("              REQUEST A PURCHASE ORDER TERMINAL             ")
+        print("============================================================")
+        print("1. Create New Purchase Request")
+        print("2. View All Purchase Requests")
+        print("3. Return to Main Menu")
+        choice = input("Enter choice (1, 2, or 3): ")
+
+        if choice == "1":
+            serial_no = input("Enter Request No / Reference No: ")
+            item_description = input("Enter Item Description: ")
+            quantity = input("Enter Quantity Needed: ")
+            unit = input("Enter Unit (e.g. Kg, Pcs, Ton): ")
+            purpose = input("Enter Purpose / End Use: ")
+
+            req_data = [serial_no, item_description, quantity, unit, purpose]
+            requested_po_list.append(req_data)
+            print("\n[Success] Purchase Request submitted to Store/Purchase Department!")
+
+        elif choice == "2":
+            if requested_po_list == []:
+                print("\nNone")
+            else:
+                for req in requested_po_list:
+                    print("\n============================================================")
+                    print("                   PENDING PURCHASE REQUEST                 ")
+                    print("============================================================")
+                    print(f"| Request No           | {req[0]:<33} |")
+                    print(f"| Item Description     | {req[1]:<33} |")
+                    print(f"| Quantity Needed      | {req[2]} {req[3]:<30} |")
+                    print(f"| Purpose / Use        | {req[4]:<33} |")
+                    print("============================================================")
+
+        elif choice == "3":
+            main_terminal()
+            break
+        else:
+            print("\nInvalid choice. Try again.")
+
+def make_purchase_order():
+    while True:
+        print("\n============================================================")
+        print("                       PO TERMINAL                          ")
+        print("============================================================")
+        print("1. Add a Purchase Order")
+        print("2. Watch Purchases Made")
+        print("3. Exit Terminal")
+        choice = input("Enter choice (1, 2, or 3): ")
+        
+        if choice == "1":
+            if requested_po_list != []:
+                print("\n*** PENDING PURCHASE REQUESTS FOUND ***")
+                pos = 1
+                for req in requested_po_list:
+                    print(pos, ". Req No:", req[0], "| Item:", req[1], "| Qty:", req[2], req[3], "| Purpose:", req[4])
+                    pos = pos + 1
+
+                print("\nOptions:")
+                print("1. Process & Confirm a Pending Request")
+                print("2. Create Brand New Purchase Order Directly")
+                po_mode = input("Enter choice (1 or 2): ")
+
+                if po_mode == "1":
+                    req_choice = input("Enter the Request Number to Confirm (1, 2, ...): ")
+                    
+                    found_index = -1
+                    counter = 1
+                    for item in requested_po_list:
+                        if req_choice == str(counter):
+                            found_index = counter - 1
+                            break
+                        counter = counter + 1
+
+                    if found_index != -1:
+                        sel_req = requested_po_list[found_index]
+                        print("\n--- ENTERING COMMERCIAL DETAILS FOR APPROVED REQUEST ---")
+                        print(f"Item: {sel_req[1]} | Qty: {sel_req[2]} {sel_req[3]} | Purpose: {sel_req[4]}")
+                        
+                        vendor_name = input("Enter Vendor Name: ")
+                        serial_no = input("Enter Official PO Serial No: ")
+                        rate = input("Enter Rate: ")
+                        discount = input("Enter Discount: ")
+                        amount = input("Enter Total Amount: ")
+                        tax = input("Enter Tax: ")
+                        freight = input("Enter Freight: ")
+                        insurance_no = input("Enter Insurance No: ")
+                        gstin = input("Enter GSTIN: ")
+                        bill_to_address = input("Enter Bill To Address: ")
+                        ship_to_address = input("Enter Ship To Address: ")
+
+                        po_data = [
+                            vendor_name, serial_no, sel_req[1], sel_req[2], sel_req[3],
+                            rate, discount, amount, tax, freight, insurance_no, gstin,
+                            bill_to_address, ship_to_address
+                        ]
+                        purchase_orders_list.append(po_data)
+                        print("\n[Success] Request approved and Official Purchase Order created!")
+                        continue
+                    else:
+                        print("\n[Error] Invalid Request Number!")
+                        continue
+
+            vendor_name = input("Enter Vendor Name: ")
+            serial_no = input("Enter Serial No: ")
+            item_description = input("Enter Item Description: ")
+            quantity = input("Enter Quantity: ")
+            unit = input("Enter Unit: ")
+            rate = input("Enter Rate: ")
+            discount = input("Enter Discount: ")
+            amount = input("Enter Amount: ")
+            tax = input("Enter Tax: ")
+            freight = input("Enter Freight: ")
+            insurance_no = input("Enter Insurance No: ")
+            gstin = input("Enter GSTIN: ")
+            bill_to_address = input("Enter Bill To Address: ")
+            ship_to_address = input("Enter Ship To Address: ")
+            
+            po_data = [
+                vendor_name, serial_no, item_description, quantity, unit, 
+                rate, discount, amount, tax, freight, insurance_no, gstin, 
+                bill_to_address, ship_to_address
+            ]
+            purchase_orders_list.append(po_data)
+            print("\n[Success] Purchase Order has been recorded!")
+            
+        elif choice == "2":
+            if purchase_orders_list == []:
+                print("\nNone")
+            else:
+                for po in purchase_orders_list:
+                    print("\n============================================================")
+                    print("                      PURCHASE ORDER                        ")
+                    print("============================================================")
+                    print("| FIELD                | DETAILS                           |")
+                    print("------------------------------------------------------------")
+                    print(f"| Vendor Name          | {po[0]:<33} |")
+                    print(f"| Serial No            | {po[1]:<33} |")
+                    print(f"| Item Description     | {po[2]:<33} |")
+                    print(f"| Quantity             | {po[3]:<33} |")
+                    print(f"| Unit                 | {po[4]:<33} |")
+                    print(f"| Rate                 | {po[5]:<33} |")
+                    print(f"| Discount             | {po[6]:<33} |")
+                    print(f"| Amount               | {po[7]:<33} |")
+                    print(f"| Tax                  | {po[8]:<33} |")
+                    print(f"| Freight              | {po[9]:<33} |")
+                    print(f"| Insurance No         | {po[10]:<33} |")
+                    print(f"| GSTIN                | {po[11]:<33} |")
+                    print(f"| Bill To Address      | {po[12]:<33} |")
+                    print(f"| Ship To Address      | {po[13]:<33} |")
+                    print("============================================================")
+                    
+        elif choice == "3":
+            print("\nExiting Terminal. Returning to Main Menu...")
+            main_terminal()
+            break
+        else:
+            print("\nInvalid selection choice.")
+
+def gate():
+    while True:
+        print("\n============================================================")
+        print("                      GATE TERMINAL                         ")
+        print("============================================================")
+        print("1. New Gate Inward Entry")
+        print("2. View Gate Entries")
+        print("3. Return to Main Menu")
+        choice = input("Enter choice (1, 2, or 3): ")
+
+        if choice == "1":
+            if purchase_orders_list == []:
+                print("\n[Alert] No Purchase Orders found in system!")
+            else:
+                po_search = input("Enter Purchase Order Serial No: ")
+                found_po = []
+                for po in purchase_orders_list:
+                    if po[1] == po_search:
+                        found_po = po
+                        break
+
+                if found_po == []:
+                    print("\n[Flagged] Invalid PO Number! Not found.")
+                else:
+                    print("\n============================================================")
+                    print("             PURCHASE ORDER VERIFICATION (GATE)             ")
+                    print("============================================================")
+                    print(f"| Vendor Name      : {found_po[0]:<37} |")
+                    print(f"| Item Description : {found_po[2]:<37} |")
+                    print(f"| Quantity         : {found_po[3]:<37} |")
+                    print(f"| Unit             : {found_po[4]:<37} |")
+                    print("============================================================")
+
+                    driver_name = input("Enter Driver Name: ")
+                    vehicle_reg_no = input("Enter Vehicle Registration No: ")
+                    token_no = input("Enter Token No: ")
+
+                    gate_entry = [
+                        found_po[1], found_po[0], found_po[2], found_po[3], found_po[4],
+                        driver_name, vehicle_reg_no, token_no
+                    ]
+                    gate_entries_list.append(gate_entry)
+                    print("\n[Success] Gate Inward entry recorded!")
+
+        elif choice == "2":
+            if gate_entries_list == []:
+                print("\nNone")
+            else:
+                for entry in gate_entries_list:
+                    print("\n============================================================")
+                    print("                       GATE PASS ENTRY                      ")
+                    print("============================================================")
+                    print("| FIELD                | DETAILS                           |")
+                    print("------------------------------------------------------------")
+                    print(f"| PO Serial No         | {entry[0]:<33} |")
+                    print(f"| Vendor Name          | {entry[1]:<33} |")
+                    print(f"| Item Description     | {entry[2]:<33} |")
+                    print(f"| Declared Quantity    | {entry[3]:<33} |")
+                    print(f"| Unit                 | {entry[4]:<33} |")
+                    print(f"| Driver Name          | {entry[5]:<33} |")
+                    print(f"| Vehicle Reg No       | {entry[6]:<33} |")
+                    print(f"| Token No             | {entry[7]:<33} |")
+                    print("============================================================")
+
+        elif choice == "3":
+            print("\nReturning to Main Terminal...")
+            main_terminal()
+            break
+        else:
+            print("\nInvalid choice. Try again.")
+
+def weighable_bridge(selected_gate_entry):
+    print("\n--- WEIGHBRIDGE PLATFORM SCALE ---")
+    gross_weight = input("Enter Gross Weight: ")
+    wb_record = [
+        selected_gate_entry[0], selected_gate_entry[1], selected_gate_entry[2],
+        selected_gate_entry[3], selected_gate_entry[4], selected_gate_entry[5],
+        selected_gate_entry[6], selected_gate_entry[7], "Weighable", gross_weight
+    ]
+    weighbridge_entries_list.append(wb_record)
+    print("\n[Success] Gross weight recorded successfully on scale!")
+    print("STATUS: >> GO TO STORE <<")
+    time.sleep(1)
+
+def weight_bridge():
+    while True:
+        print("\n============================================================")
+        print("                  WEIGHT BRIDGE TERMINAL                    ")
+        print("============================================================")
+        print("1. Process Inward Vehicle")
+        print("2. View Weighbridge Slips")
+        print("3. Return to Main Menu")
+        choice = input("Enter choice (1, 2, or 3): ")
+
+        if choice == "1":
+            if gate_entries_list == []:
+                print("\n[Alert] No Gate entries available!")
+            else:
+                token_search = input("Enter Token No or Vehicle No from Gate Entry: ")
+                matched_gate = []
+                for g in gate_entries_list:
+                    if g[7] == token_search or g[6] == token_search:
+                        matched_gate = g
+                        break
+
+                if matched_gate == []:
+                    print("\n[Error] No gate entry found matching that Token/Vehicle No!")
+                else:
+                    print("\n============================================================")
+                    print("                 GATE PASS DETAILS VERIFIED                 ")
+                    print("============================================================")
+                    print(f"| Token No     : {matched_gate[7]:<40} |")
+                    print(f"| Vehicle No   : {matched_gate[6]:<40} |")
+                    print(f"| Driver Name  : {matched_gate[5]:<40} |")
+                    print(f"| Item         : {matched_gate[2]:<40} |")
+                    print(f"| Declared Qty : {matched_gate[3]} {matched_gate[4]:<35} |")
+                    print("============================================================")
+
+                    print("\nSelect Material Category:")
+                    print(" 1. Countable")
+                    print(" 2. Weighable")
+                    mat_choice = input("Enter Category (1 or 2): ")
+
+                    if mat_choice == "1":
+                        input_type = input("Enter Type: ")
+                        wb_record = [
+                            matched_gate[0], matched_gate[1], matched_gate[2],
+                            matched_gate[3], matched_gate[4], matched_gate[5],
+                            matched_gate[6], matched_gate[7], "Countable", "N/A"
+                        ]
+                        weighbridge_entries_list.append(wb_record)
+                        print("STATUS: >> GO TO STORE <<")
+                        time.sleep(1)
+                        main_terminal()
+                        break
+
+                    elif mat_choice == "2":
+                        weighable_bridge(matched_gate)
+                        main_terminal()
+                        break
+
+                    else:
+                        print("\n**** INVALID SELECTION! TRY AGAIN WEIGHT BRIDGE ****")
+
+        elif choice == "2":
+            if weighbridge_entries_list == []:
+                print("\nNone")
+            else:
+                for wb in weighbridge_entries_list:
+                    print("\n============================================================")
+                    print("                     WEIGHBRIDGE SLIP                       ")
+                    print("============================================================")
+                    print("| FIELD                | DETAILS                           |")
+                    print("------------------------------------------------------------")
+                    print(f"| PO Serial No         | {wb[0]:<33} |")
+                    print(f"| Vendor Name          | {wb[1]:<33} |")
+                    print(f"| Item Description     | {wb[2]:<33} |")
+                    print(f"| Vehicle Reg No       | {wb[6]:<33} |")
+                    print(f"| Token No             | {wb[7]:<33} |")
+                    print(f"| Flow Type            | {wb[8]:<33} |")
+                    print(f"| Gross Weight         | {wb[9]:<33} |")
+                    print("============================================================")
+
+        elif choice == "3":
+            print("\nReturning to Main Terminal...")
+            main_terminal()
+            break
+        else:
+            print("\nInvalid choice. Try again.")
+
+def issue_goods():
+    print("\n--- ISSUE GOODS OUTWARD ---")
+    voucher_no = input("Enter Voucher No: ")
+    department = input("Enter Department: ")
+    item_name = input("Enter Item to Issue: ")
+    quantity = input("Enter Quantity: ")
+    receiver = input("Enter Receiver Name: ")
+
+    issue_data = [voucher_no, department, item_name, quantity, receiver]
+    issued_goods_list.append(issue_data)
+    print("\n[Success] Material Issued successfully!")
+
+def store_keeping():
+    while True:
+        print("\n============================================================")
+        print("                  STORE KEEPING TERMINAL                    ")
+        print("============================================================")
+        print("1. Issue Goods")
+        print("2. Check Issued Goods")
+        print("3. Receive Goods")
+        print("4. Check Received Goods")
+        print("5. Return to Main Menu")
+        choice = input("Enter choice (1-5): ")
+
+        if choice == "1":
+            issue_goods()
+
+        elif choice == "2":
+            if issued_goods_list == []:
+                print("\nNone")
+            else:
+                for ig in issued_goods_list:
+                    print("\n============================================================")
+                    print("                    ISSUED GOODS VOUCHER                    ")
+                    print("============================================================")
+                    print("| FIELD                | DETAILS                           |")
+                    print("------------------------------------------------------------")
+                    print(f"| Voucher No           | {ig[0]:<33} |")
+                    print(f"| Department           | {ig[1]:<33} |")
+                    print(f"| Item Issued          | {ig[2]:<33} |")
+                    print(f"| Quantity             | {ig[3]:<33} |")
+                    print(f"| Receiver             | {ig[4]:<33} |")
+                    print("============================================================")
+
+        elif choice == "3":
+            if weighbridge_entries_list == []:
+                print("\n[Alert] No vehicles cleared through Weighbridge!")
+            else:
+                wb_search = input("Enter Token No or PO Serial No to Receive: ")
+                matched_wb = []
+                for wb in weighbridge_entries_list:
+                    if wb[7] == wb_search or wb[0] == wb_search:
+                        matched_wb = wb
+                        break
+
+                if matched_wb == []:
+                    print("\n[Error] Weighbridge slip not found!")
+                else:
+                    matched_po = []
+                    for po in purchase_orders_list:
+                        if po[1] == matched_wb[0]:
+                            matched_po = po
+                            break
+
+                    print("\n============================================================")
+                    print("                 INWARD MATERIAL VERIFICATION               ")
+                    print("============================================================")
+                    print(f"| PO Number    : {matched_wb[0]:<40} |")
+                    print(f"| Vendor Name  : {matched_wb[1]:<40} |")
+                    print(f"| Item         : {matched_wb[2]:<40} |")
+                    print(f"| Vehicle No   : {matched_wb[6]:<40} |")
+                    print(f"| Type         : {matched_wb[8]:<40} |")
+                    print(f"| Gross Weight : {matched_wb[9]:<40} |")
+                    print("============================================================")
+
+                    grn_choice = input("Enter 1 for Goods Receipt Note (GRN): ")
+                    if grn_choice == "1":
+                        tare_weight = input("Enter Tare Weight: ")
+                        storage_location = input("Enter Storage Location: ")
+                        goods_type = input("Enter Goods Type: ")
+
+                        if matched_po != []:
+                            po_rate = matched_po[5]
+                            po_amount = matched_po[7]
+                            po_tax = matched_po[8]
+                            po_gstin = matched_po[11]
+                        else:
+                            po_rate = "N/A"
+                            po_amount = "N/A"
+                            po_tax = "N/A"
+                            po_gstin = "N/A"
+
+                        grn_data = [
+                            matched_wb[0], matched_wb[1], matched_wb[2],
+                            matched_wb[3], matched_wb[4], matched_wb[6],
+                            matched_wb[9], tare_weight, storage_location,
+                            goods_type, po_rate, po_amount, po_tax, po_gstin
+                        ]
+                        grn_list.append(grn_data)
+                        print("\n[Success] GRN generated successfully!")
+                    else:
+                        print("\n[Cancelled] GRN not generated.")
+
+        elif choice == "4":
+            if grn_list == []:
+                print("\nNone")
+            else:
+                for grn in grn_list:
+                    print("\n============================================================")
+                    print("                GRN (GOODS RECEIPT NOTE) RECORD             ")
+                    print("============================================================")
+                    print("| FIELD                | DETAILS                           |")
+                    print("------------------------------------------------------------")
+                    print(f"| PO Serial No         | {grn[0]:<33} |")
+                    print(f"| Vendor Name          | {grn[1]:<33} |")
+                    print(f"| Item Description     | {grn[2]:<33} |")
+                    print(f"| Quantity             | {grn[3]} {grn[4]:<30} |")
+                    print(f"| Vehicle Reg No       | {grn[5]:<33} |")
+                    print(f"| Gross Weight         | {grn[6]:<33} |")
+                    print(f"| Tare Weight          | {grn[7]:<33} |")
+                    print(f"| Storage Location     | {grn[8]:<33} |")
+                    print(f"| Goods Type           | {grn[9]:<33} |")
+                    print("============================================================")
+
+        elif choice == "5":
+            print("\nReturning to Main Terminal...")
+            main_terminal()
+            break
+        else:
+            print("\nInvalid selection choice.")
+
+def accounts():
+    while True:
+        print("\n============================================================")
+        print("                     ACCOUNTS TERMINAL                      ")
+        print("============================================================")
+        print("1. Payment Window") 
+        print("2. View Received Goods (GRN)")
+        print("3. View Purchase Orders")
+        print("4. Check Past Payments")
+        print("5. Return to Main Menu")
+        
+        choice = input("Enter choice (1, 2, 3, 4, 5): ")
+
+        if choice == "1":
+            print("======================================================")
+            print("                   PAYMENT  WINDOW                    ")
+            print("======================================================")
+            
+            if grn_list == []:
+                print("\nNone")
+            else:
+                for g in grn_list:
+                    print("\n============================================================")
+                    print("                 GOODS   RECEIVE   NOTE                     ")
+                    print("============================================================")
+                    print(f"| PO Serial No     : {g[0]:<39} |")
+                    print(f"| Vendor Name      : {g[1]:<39} |")
+                    print(f"| Item Description : {g[2]:<39} |")
+                    print(f"| Quantity         : {g[3]} {g[4]:<36} |")
+                    print(f"| Vehicle Reg No   : {g[5]:<39} |")
+                    print(f"| Gross Weight     : {g[6]:<39} |")
+                    print(f"| Tare Weight      : {g[7]:<39} |")
+                    print(f"| Storage Location : {g[8]:<39} |")
+                    print(f"| Goods Type       : {g[9]:<39} |")
+                    print(f"| Rate             : {g[10]:<39} |")
+                    print(f"| Amount           : {g[11]:<39} |")
+                    print(f"| Tax              : {g[12]:<39} |")
+                    print(f"| GSTIN            : {g[13]:<39} |")
+                    print("============================================================") 
+
+            if purchase_orders_list == []:
+                print("\nNo Purchase ")
+            else:
+                for po in purchase_orders_list:
+                    print("\n============================================================")
+                    print("                      PURCHASE ORDER                        ")
+                    print("============================================================")
+                    print(f"| PO Serial No     : {po[1]:<39} |")
+                    print(f"| Vendor Name      : {po[0]:<39} |")
+                    print(f"| Rate             : {po[5]:<39} |")
+                    print(f"| Discount         : {po[6]:<39} |")
+                    print(f"| Amount           : {po[7]:<39} |")
+                    print(f"| Tax              : {po[8]:<39} |")
+                    print(f"| Freight          : {po[9]:<39} |")
+                    print(f"| Insurance No     : {po[10]:<39} |")
+                    print(f"| GSTIN            : {po[11]:<39} |")
+                    print("============================================================")
+
+            print("CHECK THE DETAILS CAREFULLY BEFORE ENTERING THE VALUES AS THIS IS IRREPLACABLE AND WILL CAUSE FINANCIAL LOSS")            
+            date = input("Payment Booking Date: ")
+            payment_invoice = input("Enter Account Book Checking Invoice No: ")
+            payment_serial_no = input("Payment Serial: ")
+            po_sr_acc = input("Purchase Order Serial: ") 
+            vendor_name = input("Enter The Vendor Name: ")
+            item_acc = input("Enter Item Description: ")
+            insurance_acc = input("Enter Insurance No: ")
+            invoice_acc = input("Enter Invoice No: ")
+            gstin_ven_acc = input("Enter Vendor Gstin: ")
+            gstin_user_acc = input("Enter Company Gstin: ")
+            goodtype_acc = input("Enter Goods Type: ")
+            good_quantity_acc = input("Enter Quantity Of Goods: ")
+            tare_acc = input("Enter Tare Weight: ")
+            rate_acc = input("Enter Rate Per Unit: ")
+            disc_acc = input("Enter Discount Rate: ")
+            tax_rate = input("Enter Tax Rate: ")
+            net_payment = input("Enter Total Amount Payable: ")
+            ven_bnkacc_no = input("Enter Vendor Bank Account No: ")
+            print("The Payment Has Been Confirmed ")
+
+            payment_data = [
+                date, payment_invoice, payment_serial_no, po_sr_acc, vendor_name, item_acc, insurance_acc, invoice_acc,
+                gstin_ven_acc, gstin_user_acc, goodtype_acc, good_quantity_acc, tare_acc, rate_acc, disc_acc, tax_rate,
+                net_payment, ven_bnkacc_no
+            ]
+            payment_list.append(payment_data)
+
+        elif choice == "2":
+            if grn_list == []:
+                print("\nNone")
+            else:
+                for g in grn_list:
+                    print("\n============================================================")
+                    print("                 GOODS   RECEIVE   NOTE                     ")
+                    print("============================================================")
+                    print(f"| PO Serial No     : {g[0]:<39} |")
+                    print(f"| Vendor Name      : {g[1]:<39} |")
+                    print(f"| Item Description : {g[2]:<39} |")
+                    print(f"| Quantity         : {g[3]} {g[4]:<36} |")
+                    print(f"| Vehicle Reg No   : {g[5]:<39} |")
+                    print(f"| Gross Weight     : {g[6]:<39} |")
+                    print(f"| Tare Weight      : {g[7]:<39} |")
+                    print(f"| Storage Location : {g[8]:<39} |")
+                    print(f"| Goods Type       : {g[9]:<39} |")
+                    print(f"| Rate             : {g[10]:<39} |")
+                    print(f"| Amount           : {g[11]:<39} |")
+                    print(f"| Tax              : {g[12]:<39} |")
+                    print(f"| GSTIN            : {g[13]:<39} |")
+                    print("============================================================")
+
+        elif choice == "3":
+            if purchase_orders_list == []:
+                print("\nNone")
+            else:
+                for po in purchase_orders_list:
+                    print("\n============================================================")
+                    print("                      PURCHASE ORDER                        ")
+                    print("============================================================")
+                    print(f"| PO Serial No     : {po[1]:<39} |")
+                    print(f"| Vendor Name      : {po[0]:<39} |")
+                    print(f"| Rate             : {po[5]:<39} |")
+                    print(f"| Discount         : {po[6]:<39} |")
+                    print(f"| Amount           : {po[7]:<39} |")
+                    print(f"| Tax              : {po[8]:<39} |")
+                    print(f"| Freight          : {po[9]:<39} |")
+                    print(f"| Insurance No     : {po[10]:<39} |")
+                    print(f"| GSTIN            : {po[11]:<39} |")
+                    print("============================================================")
+
+        elif choice == "4":
+            if payment_list == []:
+                print(" No Purchases Yet ")
+            else:
+                search_payments = input("Enter the ACCOUNTS Invoice No : ")
+                found_payments = []
+                for i in payment_list:
+                    if i[1] == search_payments:
+                        found_payments = i
+                        break
+
+                if found_payments == []:
+                    print("NO PAYMENT WITH THE SEARCHED INVOICE NO. TRY AGAIN ")
+                    accounts()
+                else:
+                    print("\n============================================================")
+                    print("                 PAYMENT CONFIRMATION SLIP                  ")
+                    print("============================================================")
+                    print("| FIELD                     | DETAILS                      |")
+                    print("------------------------------------------------------------")
+                    print(f"| Payment Booking Date      | {found_payments[0]:<28} |")
+                    print(f"| Acc Checking Invoice No   | {found_payments[1]:<28} |")
+                    print(f"| Payment Serial No         | {found_payments[2]:<28} |")
+                    print(f"| PO Serial No              | {found_payments[3]:<28} |")
+                    print(f"| Vendor Name               | {found_payments[4]:<28} |")
+                    print(f"| Item Description          | {found_payments[5]:<28} |")
+                    print(f"| Insurance No              | {found_payments[6]:<28} |")
+                    print(f"| Invoice No                | {found_payments[7]:<28} |")
+                    print(f"| Vendor GSTIN              | {found_payments[8]:<28} |")
+                    print(f"| Company GSTIN             | {found_payments[9]:<28} |")
+                    print(f"| Goods Type                | {found_payments[10]:<28} |")
+                    print(f"| Goods Quantity            | {found_payments[11]:<28} |")
+                    print(f"| Tare Weight               | {found_payments[12]:<28} |")
+                    print(f"| Rate Per Unit             | {found_payments[13]:<28} |")
+                    print(f"| Discount Rate             | {found_payments[14]:<28} |")
+                    print(f"| Tax Rate                  | {found_payments[15]:<28} |")
+                    print(f"| Total Amount Payable      | {found_payments[16]:<28} |")
+                    print(f"| Vendor Bank Account No    | {found_payments[17]:<28} |")
+                    print("============================================================")
+
+        elif choice == "5":
+            main_terminal()
+            break
+        else:
+            print("\nInvalid choice.")
+
+def it_admin():
+    print("\n================ IT ADMIN LOGS ================")
+    if it_security_logs == []:
+        print("No flagged security logs.")
+    else:
+        for log in it_security_logs:
+            print("Failed login attempt by:", log)
+    print("===============================================")
+    main_terminal()
+
+login()
+</code></pre>
+  </div>
+</body>
+</html>
