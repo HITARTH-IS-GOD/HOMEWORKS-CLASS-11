@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Updated ERS Project</title>
+  <style>
+    body { margin: 0; padding: 30px 20px; font-family: Arial, sans-serif; background: #0f172a; color: #e2e8f0; }
+    .container { max-width: 1200px; margin: auto; background: #172033; border: 1px solid #334155; border-radius: 18px; padding: 28px; }
+    .meta { color: #93c5fd; font-weight: bold; text-transform: uppercase; letter-spacing: .08em; }
+    a { color: #93c5fd; }
+    pre { background: #020817; border: 1px solid #334155; border-radius: 12px; padding: 20px; overflow: auto; white-space: pre; line-height: 1.6; font: 14px/1.6 Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <p><a href="../index.html">← Back to Home</a></p>
+    <p class="meta">Class 11 CS Final Project</p>
+    <h1>Updated ERS Project</h1>
+    <p><a href="updated-ers-project.py">View the Python source file</a></p>
+    <pre><code id="source">Loading project code…</code></pre>
+  </main>
+  <script>
+    fetch('updated-ers-project.py')
+      .then(response => {
+        if (!response.ok) throw new Error('Could not load the Python source.');
+        return response.text();
+      })
+      .then(code => { document.getElementById('source').textContent = code; })
+      .catch(error => { document.getElementById('source').textContent = error.message; });
+  </script>
+</body>
+</html>
